@@ -8,7 +8,10 @@
 * 适合原生小程序，可以随时引入，不影响原有的业务，拓展性强。
 
 ## 更新日志
-
+### 1.2.8
+\[2019.11.27\] `F`: 优化diff能力。  
+### 1.2.7
+\[2019.9.6\] `F`: 修复删除state中的数组，删除的项会为null的问题。  
 ### 1.2.6
 \[2019.6.26\] `A`: 新增[store.prototype.getState](#state)，用于读取store.$state的拷贝，防止对原状态进行误操作。 
 
@@ -37,6 +40,7 @@
 
 ## <div id="start">开始</div>
 
+在开始前，你可以clone或下载本项目，用微信开发工具打开demo目录来查看效果。  
 
 ### <div id="start-1">1.安装及引入</div>
 目前有两种引入方式：
@@ -58,7 +62,7 @@ App({
 })
 ```
 #### clone
-如果不太熟悉npm没关系，你可以将本项目中util下的store.js复制到你的项目中，并在`app.js第一行`引入：
+如果不太熟悉npm没关系，你可以将本项目中lib/store.js复制到你的项目中，并在`app.js第一行`引入：
 ```js
 //app.js中
 import Store from './util/store.js';
@@ -256,9 +260,10 @@ App.Page({
   * 非交互型事件（即非bindxx）的公用方法，建议不写入Store中。写入App中更好。
 
 
-## <div id="part">状态局部模式</div>
+## <div id="part">局部状态模式</div>
 在项目的组件和页面越来越多且复用率越来越高时，全局$state的利用率就很低，这时候就出现了一种情况，页面中的组件和页面达到百千量级，每个内部都有一个$state，而用到它的可能就只有1个或几个。就会引起各种性能问题。比如更新$state十分缓慢，且低效。  
 这时候你需要将$state调整为部分组件和页面可用，而不是所有。
+
 ### 1.开启局部模式
 ``` js
 let store = new Store({
@@ -291,7 +296,7 @@ App.Page({
 })
 ```
 a页面设置了Store可用，所以可以通过this.data.$state获取。
-b页面没有设置，所以为undefined，但两个页面均可通过store.$state获取。
+b页面没有设置，所以为undefined，但两个页面均可通过store.getState()读取全局状态。
 ``` html
 <--! a页面有效 -->
 <view>{{$state.msg}}</view>
@@ -304,6 +309,8 @@ b页面没有设置，所以为undefined，但两个页面均可通过store.$sta
 * openPart一旦开启，所有没有设置useStore的页面和组件将不能在wxml中使用$state。
 * 组件或页面.js中，我们建议使用getApp().store.getState()去获取全局状态，因为他没有限制。
 * 仅在wxml中需要用到$state的页面和组件中开启useStore。
+
+你可以clone或下载本项目，用微信开发工具打开demo目录来查看具体用法。 
 
 
 ## <div id="useProp"> 页面中useProp属性 `1.2.3+`</div>
@@ -363,7 +370,7 @@ App.Page({
   useProp: ['s1'], //指定使用s1
   onLoad(){
     console.log(this.data.$state) // { s1: 's1状态' }
-    console.log(getApp().store.$state) // { s1: 's1状态', s2: 's2状态' }
+    console.log(getApp().store.getState()) // { s1: 's1状态', s2: 's2状态' }
   }
 })
 
@@ -372,7 +379,7 @@ App.Page({
   useProp: ['s1'], //指定使用s1 但没设置useStore，所以无效
   onLoad(){
     console.log(this.data.$state) // undefined
-    console.log(getApp().store.$state) // { s1: 's1状态', s2: 's2状态' }
+    console.log(getApp().store.getState()) // { s1: 's1状态', s2: 's2状态' }
   }
 })
 ```
@@ -397,7 +404,6 @@ App.Page({
   将你所有页面与组件创建方法改为`App.Page(...) 和 App.Component(...)`。
   ```js
   //页面.js
-  const app = getApp()
   App.Page({
     data: {
 
@@ -459,3 +465,8 @@ App({
 
 MiniStore非常适合原生小程序。可以随时引入，不影响原有的业务，拓展性强。
 欢迎star、欢迎提issue甚至pr...
+
+
+## License
+
+MIT © [Leisure](https://github.com/yx675258207)

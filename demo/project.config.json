@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.2.4",
 	"appid": "",
-	"projectname": "store%E7%A4%BA%E4%BE%8B",
+	"projectname": "store-demo",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

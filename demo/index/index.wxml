@@ -1,0 +1,17 @@
+<view style='margin-top: 200rpx;text-align:left;line-height:60rpx;'>
+  <text>{{$state.msg}}</text>
+</view>
+<view style='margin-top: 50rpx;' wx:if="{{$state.finish}}">
+  <icon type='success' /> 已完成所有阅读
+</view>
+<button bindtap='goAnyWhere' data-url='/detail/detail'>
+  开始
+</button>
+<button bindtap='goAnyWhere' data-url='/counter/counter'>
+  查看计数器例子
+</button>
+<text>当前：{{$state.counter}}</text>
+
+<view wx:for="{{$state.list}}">
+  {{item.name}}
+</view>
