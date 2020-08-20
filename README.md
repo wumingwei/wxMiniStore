@@ -15,7 +15,7 @@
 ### 1.3.0
 
 \[2020.7.28\]  
-`A`：新增 [store.prototype.clearState](#clearState) 清除状态。  
+`A`：新增 [store.prototype.clearState](#clearState) 清除状态，by [@zkl2333](https://github.com/zkl2333)  
 `F`：新增polyfill，修复 [#25](https://github.com/xiaoyao96/wxMiniStore/issues/25)。  
 `F`：单词错误 pageLisener 改为 pageListener（已做向下兼容可放心升级）。  
 
