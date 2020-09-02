@@ -16,7 +16,7 @@ export default new Store({
       })
     }
   },
-  pageLisener: {
+  pageListener: {
     onLoad(options) {
       console.log('我在' + this.route, '参数为', options);
     },
@@ -24,6 +24,6 @@ export default new Store({
       console.log('lalala')
     }
   },
-  //开启了局部模式
+  // 开启了局部模式
   openPart: true
 })
